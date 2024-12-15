@@ -1,0 +1,74 @@
+# Fitness Tracker with BMI, Calories, Steps, and Performance Monitoring
+
+def calculate_bmi(weight, height):
+    """Calculate BMI based on weight (kg) and height (m)."""
+    return weight / (height ** 2)
+
+def suggest_based_on_bmi(bmi):
+    """Provide suggestions based on BMI."""
+    if bmi < 18.5:
+        return "Underweight - Consider a balanced diet with more calories."
+    elif 18.5 <= bmi < 24.9:
+        return "Normal - Maintain your current fitness routine."
+    elif 25 <= bmi < 29.9:
+        return "Overweight - Incorporate regular exercise and a healthy diet."
+    else:
+        return "Obese - Seek advice from a healthcare provider for tailored fitness plans."
+
+def calculate_daily_calories(weight, activity_level):
+    """Estimate daily calorie burn based on weight and activity level."""
+    # Activity multipliers: 1.2 (low), 1.5 (moderate), 1.8 (high)
+    return weight * 24 * activity_level
+
+def calculate_daily_steps(calories):
+    """Convert calorie burn to an estimated step count."""
+    # Approximation: 1 calorie burned = 20 steps
+    return calories * 20
+
+def evaluate_performance(points):
+    """Evaluate the performance based on points."""
+    if points > 100:
+        return "Excellent performance!"
+    elif points > 70:
+        return "Good performance."
+    elif points > 50:
+        return "Fair performance."
+    else:
+        return "Needs improvement."
+
+# Main program
+print("Welcome to the Fitness Tracker!")
+weight = float(input("Enter your weight in kg: "))
+height = float(input("Enter your height in meters: "))
+activity_level = float(input("Enter your activity level (1.2 for low, 1.5 for moderate, 1.8 for high): "))
+
+# BMI Calculation
+bmi = calculate_bmi(weight, height)
+suggestion = suggest_based_on_bmi(bmi)
+
+# Daily Calories and Steps
+daily_calories = calculate_daily_calories(weight, activity_level)
+daily_steps = calculate_daily_steps(daily_calories)
+
+# Assign points based on user activity
+steps_taken = int(input("Enter the number of steps you took today: "))
+calories_burned = float(input("Enter the calories you burned today: "))
+
+# Points: Steps (50%), Calories (50%)
+step_points = (steps_taken / daily_steps) * 50
+calorie_points = (calories_burned / daily_calories) * 50
+
+total_points = step_points + calorie_points
+performance = evaluate_performance(total_points)
+
+# Display Results
+print("\nFitness Tracker Report")
+print("------------------------")
+print(f"BMI: {bmi:.2f}")
+print(f"Suggestion: {suggestion}")
+print(f"Estimated Daily Calories Burned: {daily_calories:.2f}")
+print(f"Estimated Daily Steps: {daily_steps:.0f}")
+print(f"Steps Taken: {steps_taken}")
+print(f"Calories Burned: {calories_burned}")
+print(f"Total Points: {total_points:.2f}")
+print(f"Performance: {performance}")
